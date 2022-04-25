@@ -42,7 +42,7 @@ export class AllUsersComponent implements OnInit {
   public getAllCustomers() {
     this.loading = true;
     this.errorMessage = "";
-    this.userService.getAllCustomers(this.sortBy)
+    this.userService.getAllCustomers( this.sortBy)
       .subscribe(
         (response) => {                           //next() callback
           console.log('response received');
