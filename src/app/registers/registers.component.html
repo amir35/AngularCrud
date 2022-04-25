@@ -1,0 +1,69 @@
+<div  *ngIf="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Success!</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="container">
+  <div class="col-lg-12">
+    <h3 class="text-center mt-5">Registration Form !</h3>
+
+    <form #registerForm = "ngForm" (ngSubmit)= "registerNow()" novalidate>
+
+      <div class="form-group row">
+        <label for="custName">Customer Name</label>
+        <input type="text" name="cname" class="form-control" id="cname" [(ngModel)]="customer.cname"
+          placeholder="ABC XYZ" required minlength="5" maxlength="20" pattern="[a-zA-Z][a-zA-Z ]+" #cname="ngModel">
+      </div>
+      <div *ngIf="!cname?.valid && (cname?.dirty || cname?.touched)" class="error">
+        <div *ngIf="cname.errors.required">
+          <p style="color: red ">Customer Name is required</p>
+        </div>
+        <div *ngIf="cname.errors.minlength">
+          <p style="color: red">Customer Name Minimum Length is {{cname.errors.minlength?.requiredLength}}</p>
+        </div>
+        <div *ngIf="cname.errors.pattern">
+          <p style="color: red">Only characters are allowed</p>
+        </div>
+      </div>
+      
+
+      <div class="form-group row">
+        <label for="custJob">Customer Job</label>
+        <input type="text" name="cjob" class="form-control" id="cjob" [(ngModel)]="customer.cjob"
+          placeholder="System Engineer" required minlength="5" maxlength="20" pattern="[a-zA-Z][a-zA-Z ]+" #cjob="ngModel">
+      </div>
+      <div *ngIf="!cjob?.valid && (cjob?.dirty || cjob?.touched)" class="error">
+        <div *ngIf="cjob.errors.required">
+          <p style="color: red ">Customer Job is required</p>
+        </div>
+        <div *ngIf="cjob.errors.minlength">
+          <p style="color: red">Customer Job Minimum Length is {{cjob.errors.minlength?.requiredLength}}</p>
+        </div>
+        <div *ngIf="cjob.errors.pattern">
+          <p style="color: red">Only characters are allowed</p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="gender">Gender</label>&nbsp;&nbsp;&nbsp;
+        <input type="radio" value="Male" id="gender" name="gender" 
+        #gender="ngModel" [(ngModel)]="customer.gender" required> Male&nbsp;&nbsp;
+        <input type="radio" value="Female" id="gender" name="gender" 
+        #gender="ngModel" [(ngModel)]="customer.gender" required> Female
+      </div>
+      <div *ngIf="!gender?.valid && (gender?.dirty || gender?.touched)" class="error">
+        <div *ngIf="gender.errors.required">
+          <p><B><i>Gender is required</i></B></p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <input class="btn btn-success" type="submit" name="submit" value="Register" [disabled]="!registerForm.valid">
+        <!--(click)="registerNow()"-->
+      </div>
+
+    </form>
+  </div>
+</div>

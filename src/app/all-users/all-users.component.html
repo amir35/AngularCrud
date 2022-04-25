@@ -1,0 +1,53 @@
+<style>
+    .my-pagination /deep/ .ngx-pagination .current {
+        background: red;
+    }
+</style>
+<div  *ngIf="deleteDone" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+
+<div class="container" style="padding-top:70px">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="bg-info">
+                <tr>
+                    <td>Customer Id</td>
+                    <td>Customer Name</td>
+                    <td>Customer Job</td>
+                    <td>Gender</td>
+                    <td>Aadhar Card Number</td>
+                    <td>Update Customer</td>
+                    <td>Delete Customer</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 6, currentPage: p }">
+                    <td>{{ customer.cid }}</td>
+                    <td>{{ customer.cname | genderPipe:customer.gender }}</td>
+                    <td>{{ customer.cjob }}</td>
+                    <td>{{ customer.gender}}</td>
+                    <td>{{ customer.cust_aadhar}}</td>
+                    <td>
+                        <input class="btn btn-primary btn-md" type="submit" name="edit" value="Edit"
+                            routerLink="editCust/{{customer.cid}}">
+                    </td>
+                    <td>
+                        <!--<input class = "btn btn-danger btn-md" type="submit" name="delete" value="Delete" >-->
+                        <input class="btn btn-danger btn-md" type="submit" name="delete" value="Delete"
+                            (click)="custDel(customer.cid)">
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls class="my-pagination text-center" (pageChange)="p = $event" previousLabel="Previous"
+            nextLabel="Next" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+
+    </div>
+</div>
