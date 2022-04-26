@@ -4,6 +4,7 @@ import { Customer2 } from '..//customer2';
 import { UserServiceService } from '../user-service.service';
 import Swal from 'sweetalert2';
 
+
 //import { PaginationService } from './pagination.service';
 
 @Component({
@@ -104,6 +105,35 @@ export class AllUsersComponent implements OnInit {
 
   closeAlert() {
     this.deleteDone = false;
+  }
+
+
+  sortById()
+  {
+    
+    this.sortBy = "cid";
+    this.getAllCustomers();
+  }
+
+  sortByName()
+  {
+    
+    this.sortBy = "cname";
+    this.getAllCustomers();
+  }
+
+  sortByJob()
+  {
+    
+    this.sortBy = "cjob";
+    this.getAllCustomers();
+  }
+
+  sortByGender()
+  {
+    
+    this.sortBy = "gender";
+    this.getAllCustomers();
   }
 
 
